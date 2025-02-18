@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-axios.defaults.baseURL = "https://server-test-ybsn.onrender.com";
+axios.defaults.baseURL = "https://server-test-oqdo.onrender.com";
 
 
 function Dashboard() {
