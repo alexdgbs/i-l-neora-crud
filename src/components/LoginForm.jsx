@@ -20,14 +20,11 @@ function LoginForm() {
       console.log('Respuesta del servidor:', response.data);
 
       if (response.data.token) {
-        //Decodifica el token para obtener el rol
         const decodedToken = jwtDecode(response.data.token);
         const userRole = decodedToken.role;
         
         console.log('Token decodificado:', decodedToken);
         console.log('Rol del usuario:', userRole);
-
-        //Token y rol en localStorage
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", userRole);
 
@@ -47,13 +44,10 @@ function LoginForm() {
     } catch (error) {
       console.error("Error detallado:", error);
       if (error.response) {
-
         setError(`Error: ${error.response.data.message || 'Por favor, verifica tus credenciales.'}`);
       } else if (error.request) {
-
         setError("Error de conexión. Por favor, intenta más tarde.");
       } else {
-
         setError("Error al procesar la solicitud.");
       }
     } finally {
@@ -62,69 +56,142 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-center text-emerald-500">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-100 p-4">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-emerald-100">
+        <div className="mb-8 text-center">
+          <div className=" w-14 h-14  flex items-center justify-center mx-auto mb-2 rounded-full">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-8 w-8 text-emerald-500" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" 
+              />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-700">Bienvenido</h2>
+          <p className="text-gray-500 mt-1 text-sm">Ingresa tus credenciales para continuar</p>
+        </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label 
-              className="block text-gray-700 font-bold mb-2" 
-              htmlFor="username"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              type="text"
-              placeholder="Ingresar usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            />
-          </div>
+          <div className="space-y-4">
+            <div>
+              <label 
+                className="block text-gray-700 font-medium mb-2 text-sm" 
+                htmlFor="username"
+              >
+                Nombre de Usuario
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-5 w-5 text-gray-400" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" 
+                    />
+                  </svg>
+                </div>
+                <input
+                  id="username"
+                  type="text"
+                  placeholder="Ingresar usuario"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50 text-sm"
+                />
+              </div>
+            </div>
 
-          <div>
-            <label 
-              className="block text-gray-700 font-bold mb-2" 
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"
-            />
+            <div>
+              <label 
+                className="block text-gray-700 font-medium mb-2 text-sm" 
+                htmlFor="password"
+              >
+                Contraseña
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-5 w-5 text-gray-400" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" 
+                    />
+                  </svg>
+                </div>
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="********"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-gray-50 text-sm"
+                />
+              </div>
+            </div>
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm p-2 bg-red-50 rounded-lg">
-              {error}
+            <div className="text-red-600 text-sm p-3 bg-red-50 rounded-lg border border-red-100 flex items-start">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-5 w-5 mr-2 mt-0.5 flex-shrink-0 text-red-500" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
+                />
+              </svg>
+              <span>{error}</span>
             </div>
           )}
-
-          <div className="flex items-center justify-between">
+          <div>
             <button
               type="submit"
               className={`
                 w-full
                 bg-emerald-500 
                 text-white 
-                px-4 
-                py-2 
-                rounded-3xl 
+                py-3 
+                rounded-xl
                 hover:bg-emerald-600 
                 focus:outline-none 
                 focus:ring-2 
                 focus:ring-emerald-500 
-                transition-colors
-                ${loading ? 'opacity-50 cursor-not-allowed' : ''}
+                shadow-lg
+                shadow-emerald-100
+                font-medium
+                transition-all
+                text-sm
+                ${loading ? 'opacity-70 cursor-not-allowed' : ''}
               `}
               disabled={loading}
             >
